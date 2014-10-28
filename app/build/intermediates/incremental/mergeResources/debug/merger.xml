@@ -27,6 +27,11 @@
                 qualifiers=""
                 type="drawable" />
             <file
+                name="ic_calendar"
+                path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-hdpi\ic_calendar.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
                 name="ic_communities"
                 path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-hdpi\ic_communities.png"
                 qualifiers="hdpi-v4"
@@ -65,6 +70,11 @@
                 name="ic_whats_hot"
                 path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-hdpi\ic_whats_hot.png"
                 qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_calendar"
+                path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-mdpi\ic_calendar.png"
+                qualifiers="mdpi-v4"
                 type="drawable" />
             <file
                 name="ic_communities"
@@ -107,6 +117,11 @@
                 qualifiers="mdpi-v4"
                 type="drawable" />
             <file
+                name="ic_calendar"
+                path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-xhdpi\ic_calendar.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
                 name="ic_communities"
                 path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-xhdpi\ic_communities.png"
                 qualifiers="xhdpi-v4"
@@ -145,6 +160,11 @@
                 name="ic_whats_hot"
                 path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-xhdpi\ic_whats_hot.png"
                 qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_calendar"
+                path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-xxhdpi\ic_calendar.png"
+                qualifiers="xxhdpi-v4"
                 type="drawable" />
             <file
                 name="ic_communities"
@@ -296,6 +316,9 @@ What\'s Hot
                     <item>
 @drawable/ic_whats_hot
                     </item>
+                    <item>
+@drawable/ic_calendar
+                    </item>
                 </array>
 
                 <string name="app_name" >Slider Menu
@@ -359,6 +382,36 @@ What\'s Hot
                     <!-- API 14 theme customizations can go here. -->
                 </style>
             </file>
+            <file
+                name="fragment_todo"
+                path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\layout\fragment_todo.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="add_button"
+                path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-xxhdpi\add_button.png"
+                qualifiers="xxhdpi-v4"
+                type="drawable" />
+            <file
+                name="add_button"
+                path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-xhdpi\add_button.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="add_button"
+                path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-hdpi\add_button.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="add_button"
+                path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\drawable-mdpi\add_button.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="row_todo"
+                path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\src\main\res\layout\row_todo.xml"
+                qualifiers=""
+                type="layout" />
         </source>
         <source path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\build\generated\res\rs\debug" />
         <source path="E:\GoogleDrive\W-Work\AndroidStudioProject\SlidingMenu\app\build\generated\res\generated\debug" />
