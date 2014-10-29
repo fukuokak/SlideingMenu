@@ -66,6 +66,8 @@ public class MainActivity extends Activity {
 
 		// adding nav drawer items to array
         // Daily Schedule
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
+
         for (Integer n = 0; n < ciArray.size() ; n++){
             navDrawerItems.add(new NavDrawerItem(ciArray.get(n).getListText(), navMenuIcons.getResourceId(6, -1)));
         }
@@ -174,7 +176,12 @@ public class MainActivity extends Activity {
 
 		// update the main content by replacing fragments
 		Fragment fragment = null;
+        Bundle bundle = new Bundle();
 		switch (position) {
+        case 0:
+                fragment = new TodoForgetListFragment();
+                break;
+
 		case 8:
 			fragment = new HomeFragment();
 			break;
