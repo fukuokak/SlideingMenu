@@ -9,36 +9,38 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import info.androidhive.slidingmenu.Config;
+
 /**
  * Created by fukuokak on 2014/11/04.
  */
 public class UnDoneTask {
 
     private Activity activity;
-    private static String TASK_FILE_NAME = "TaskFile.txt";
 
     public UnDoneTask(Activity activity) {
         this.activity = activity;
     }
 
     public ArrayList<TaskItem> getUnDoneTask(Calendar today) {
-        ArrayList<TaskItem> unDoneTasks = readTaskFile(TASK_FILE_NAME);
+        ArrayList<TaskItem> unDoneTasks = readTaskFile(Config.TASK_FILE_NAME);
         return unDoneTasks;
     }
 
     private ArrayList<TaskItem> readTaskFile(String taskFileName) {
         ArrayList<TaskItem> unDoneTasks = new ArrayList<TaskItem>();
 
-        try {
-            InputStream in = activity.openFileInput(taskFileName);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    in, "UTF-8"));
-            String s;
-            while ((s = reader.readLine()) != null) {
-                TaskItem unDoneTaskItem = splitSaveLine(s);
-                int diff = unDoneTaskItem.getCalendar().compareTo(Calendar.getInstance());
-                if (diff < 0 ||
-                        unDoneTaskItem.getExecuteStatus() == false) {
+            try {
+                InputStream in = activity.openFileInput(taskFileName);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                        in, "UTF-8"));
+                    String s;
+                    while ((s = reader.readLine()) != null) {
+                        TaskItem unDoneTaskItem = convertSaveFormatToTaskItem(s);
+                        int diff = unDoneTaskItem.getCalendar().compareTo(Calendar.getInstance());
+                        //現在日時以前、かつ、実行状況が未完了のTask
+                        if (diff > 0 &&
+                                unDoneTaskItem.getExecuteStatus() == false) {
                     unDoneTasks.add(unDoneTaskItem);
                 }
             }
@@ -49,18 +51,28 @@ public class UnDoneTask {
         return unDoneTasks;
     }
 
-    private TaskItem splitSaveLine(String s) {
-        Object[] saveLine = s.split(",", -1);
-        //Todo:どうしようかな
-        //取得したTaskのSchedule情報を扱うのがめんどくさい。
+    private TaskItem convertSaveFormatToTaskItem(String s) {
+
+        String[] ss = s.split(",", -1);
+        for (int i = 0; i < ss.length; i++) {
+            ss[i]=ss[i].replace("\"","");
+        }
+        String[] sc = ss[0].split("/", -1);
+
         Calendar calendar = Calendar.getInstance();
-        TaskItem saveTask = new TaskItem(calendar,
-                Integer.valueOf(saveLine[1].toString()),
-                saveLine[2].toString(),
-                saveLine[3].toString(),
-                saveLine[4].toString(),
-                Boolean.valueOf(saveLine[5].toString()),
-                Boolean.valueOf(saveLine[6].toString()));
-        return saveTask;
+        calendar.add(Calendar.YEAR,  Integer.valueOf(sc[0]));
+        calendar.add(Calendar.MONTH, Integer.valueOf(sc[1])-1);
+        calendar.add(Calendar.DAY_OF_MONTH, Integer.valueOf(sc[2]));
+
+        TaskItem taskItem = new TaskItem(
+                calendar,
+                Integer.valueOf(ss[1].toString()),
+                ss[2].toString(),
+                ss[3].toString(),
+                ss[4].toString(),
+                Boolean.valueOf(ss[5].toString())
+        );
+
+        return taskItem;
     }
 }

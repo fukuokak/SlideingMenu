@@ -13,9 +13,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +27,7 @@ import info.androidhive.slidingmenu.adapter.TaskItemListAdapter;
 import info.androidhive.slidingmenu.listener.ToDoListFragmentButtonListener;
 import info.androidhive.slidingmenu.listener.toDoListItemOnItemClickListener;
 import info.androidhive.slidingmenu.model.TaskItem;
+import info.androidhive.slidingmenu.model.ToDoListSaveItem;
 
 /**
  * Created by fukuokak on 2014/10/24.
@@ -55,43 +58,36 @@ public class TodoListFragment extends Fragment {
         super.onResume();
         toDoList = (ListView) rootView.findViewById(R.id.toDoListView);
 
-        toDoList.setAdapter(setInitialTaskItemAdapter());
+        try {
+            toDoList.setAdapter(setInitialTaskItemAdapter());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public TaskItemListAdapter setInitialTaskItemAdapter() {
-        ArrayList<TaskItem> taskItemArrayList = new ArrayList<TaskItem>();
+    public TaskItemListAdapter setInitialTaskItemAdapter() throws IOException {
 
-        //Todo ここはCalendarクラスを使用しなければならない？かMainActivityから引き渡しをする。
+        //Todo ここはStabコード
         Calendar calendar =Calendar.getInstance();
-        calendar.set(2014, Calendar.DECEMBER ,24);
+        ToDoListSaveItem tsi = new ToDoListSaveItem(getActivity());
+        ArrayList<TaskItem> taskItemArrayList = tsi.getInitialTaskItem(calendar);
 
         TaskItem ti1 = new TaskItem(calendar, 1, "睡眠", TaskItem.TASK_INTERVAL_DAILY, "00:00");
-        TaskItem ti2 = new TaskItem(calendar, 2, "メリークリスマス", TaskItem.TASK_INTERVAL_YEARLY, "12:00");
+        TaskItem ti2 = new TaskItem(calendar, 2, "朝ごはん", TaskItem.TASK_INTERVAL_YEARLY, "12:00");
         taskItemArrayList.add(ti1);
         taskItemArrayList.add(ti2);
 
-//        getInitialTaskItem(Calendar.getInstance());
+        for(int i = 0 ; i < taskItemArrayList.size() ; i++){
+            tsi.saveTaskItem(taskItemArrayList.get(i));
+        }
 
         TaskItemListAdapter todoAdapter = new TaskItemListAdapter(getActivity().getApplicationContext(),
                 taskItemArrayList);
         return todoAdapter;
-    }
-    public ArrayList<TaskItem> getInitialTaskItem(Calendar calendar){
-        ArrayList<TaskItem> initialTaskItem = new ArrayList<TaskItem>();
-        try{
-        InputStream in = getActivity().openFileInput("a.txt");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(
-                in, "UTF-8"));
-        String s;
-        while ((s = reader.readLine()) != null) {
-            Toast.makeText(getActivity().getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-        }
-        reader.close();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-
-    return null ;
     }
 }

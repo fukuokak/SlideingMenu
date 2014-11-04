@@ -179,7 +179,7 @@ public class MainActivity extends Activity {
         Bundle bundle = new Bundle();
 		switch (position) {
         case 0:
-                fragment = new TodoForgetListFragment();
+                fragment = new UnDoneListFragment();
                 break;
 
 		case 8:

@@ -27,6 +27,7 @@ import info.androidhive.slidingmenu.R;
 import info.androidhive.slidingmenu.TodoListFragment;
 import info.androidhive.slidingmenu.adapter.TaskItemListAdapter;
 import info.androidhive.slidingmenu.model.TaskItem;
+import info.androidhive.slidingmenu.model.ToDoListSaveItem;
 
 /**
  * Created by fukuokak on 2014/10/24.
@@ -42,7 +43,11 @@ public class ToDoListFragmentButtonListener implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addButton:
-                onClickAddButton(v);
+                try {
+                    onClickAddButton(v);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 break;
@@ -50,7 +55,7 @@ public class ToDoListFragmentButtonListener implements View.OnClickListener {
         ;
     }
 
-    public void onClickAddButton(View v) {
+    public void onClickAddButton(View v) throws IOException {
 
         ListView toDoList = (ListView) activity.findViewById(R.id.toDoListView);
 
@@ -61,15 +66,18 @@ public class ToDoListFragmentButtonListener implements View.OnClickListener {
         toDoList.setAdapter(todoAdapter);
     }
 
-    public ArrayList<TaskItem> getTaskItem() {
-        ArrayList<TaskItem> taskItemArrayList = new ArrayList<TaskItem>();
-        Calendar calendar =Calendar.getInstance();
-        calendar.set(2014, Calendar.JANUARY ,24);
+    public ArrayList<TaskItem> getTaskItem() throws IOException {
+        ToDoListSaveItem tsi = new ToDoListSaveItem(activity);
 
-        TaskItem ti1 = new TaskItem(calendar, 1, "睡眠", TaskItem.TASK_INTERVAL_DAILY, "00:00");
-        TaskItem ti2 = new TaskItem(calendar, 2, "ご挨拶", TaskItem.TASK_INTERVAL_YEARLY, "01:00");
-        taskItemArrayList.add(ti1);
-        taskItemArrayList.add(ti2);
+        ArrayList<TaskItem> taskItemArrayList = tsi.getInitialTaskItem(Calendar.getInstance());
+
+//        Calendar calendar =Calendar.getInstance();
+//        calendar.set(2014, Calendar.JANUARY ,24);
+
+//        TaskItem ti1 = new TaskItem(calendar, 1, "睡眠", TaskItem.TASK_INTERVAL_DAILY, "00:00");
+//        TaskItem ti2 = new TaskItem(calendar, 2, "ご挨拶", TaskItem.TASK_INTERVAL_YEARLY, "01:00");
+//        taskItemArrayList.add(ti1);
+//        taskItemArrayList.add(ti2);
         return taskItemArrayList;
     }
 
