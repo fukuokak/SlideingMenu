@@ -6,6 +6,7 @@ import java.util.Calendar;
  * Created by fukuokak on 2014/10/20.
  */
 public class CalendarItem {
+    private Calendar calendar;
     private Integer year;
     private Integer month;
     private Integer day;
@@ -17,6 +18,7 @@ public class CalendarItem {
     static String ARG_EXTRA_KEY_CALENDAR = "calendar";
 
     public CalendarItem(Calendar calendar) {
+        this.calendar = calendar ;
         this.year = calendar.get(Calendar.YEAR);
         this.month = calendar.get(Calendar.MONTH) + 1;
         this.day = calendar.get(Calendar.DATE);
@@ -25,6 +27,8 @@ public class CalendarItem {
                 + day.toString() + "(" + week_name[dayName] + ")";
         this.dayNameFlag = week_name[dayName];
     }
+
+    public Calendar getCalendar(){return calendar;};
 
     public Integer getYear() {
         return year;

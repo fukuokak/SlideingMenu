@@ -63,7 +63,7 @@ public class TaskItemListAdapter extends BaseAdapter {
             taskNum.setText(Integer.toString(taskItem.getTaskNum()));
             taskTitle.setText(taskItem.getTaskTitle());
 //            taskTitle.setText(taskItem.getTaskTitle()+"<"+taskItem.getDoTime()+">");
-            taskInterval.setText(taskItem.getTaskInterval());
+            taskInterval.setText(taskItem.getRepeatPattern());
         }
         return view;
     }

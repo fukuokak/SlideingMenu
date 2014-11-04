@@ -11,43 +11,70 @@ import java.util.Date;
  * Created by fukuokak on 2014/10/24.
  */
 public class TaskItem {
-    private String scheduleDate ;
+    private Calendar calendar ;
+    private String scheduleDateString ;
     private int taskNum ;
     private String taskTitle ;
-    private String taskInterval ;
+    private String repeatPattern ;
     private String doTime ;
+    private Boolean executeStatus ;
+    private Boolean repeatFlag ;
 
     public static String TASK_INTERVAL_DAILY =   "DAILY  ";
     public static String TASK_INTERVAL_WEEKLY =  "WEEKLY ";
     public static String TASK_INTERVAL_MONTHLY = "MONTHLY";
     public static String TASK_INTERVAL_YEARLY =  "YEARLY ";
 
-    public TaskItem(Calendar calendar, int taskNum , String taskTitle, String taskInterval , String doTime) throws NullPointerException{
-        this.scheduleDate = String.valueOf(calendar.get(Calendar.YEAR)+calendar.get(Calendar.MONTH)+calendar.get(Calendar.DAY_OF_MONTH));
+    /*
+    *新規のTaskItemを生成するときに使用する。
+     */
+    public TaskItem(Calendar calendar, int taskNum , String taskTitle, String repeatPattern , String doTime) throws NullPointerException{
+        this.calendar = calendar ;
+        this.scheduleDateString = String.valueOf(calendar.get(Calendar.YEAR)+calendar.get(Calendar.MONTH)+calendar.get(Calendar.DAY_OF_MONTH));
         this.taskNum = taskNum;
         this.taskTitle = taskTitle;
-        if (taskInterval.equals(TASK_INTERVAL_DAILY)||
-                taskInterval.equals(TASK_INTERVAL_WEEKLY)||
-                taskInterval.equals(TASK_INTERVAL_MONTHLY)||
-                taskInterval.equals(TASK_INTERVAL_YEARLY)){
-            this.taskInterval = taskInterval;
+        if (repeatPattern.equals(TASK_INTERVAL_DAILY)||
+                repeatPattern.equals(TASK_INTERVAL_WEEKLY)||
+                repeatPattern.equals(TASK_INTERVAL_MONTHLY)||
+                repeatPattern.equals(TASK_INTERVAL_YEARLY)){
+            this.repeatPattern = repeatPattern;
         } else{
             throw new NullPointerException
                     ("taskInterval is not match");
         }
         this.doTime = doTime;
+        this.executeStatus = false ;
+        this.repeatFlag = true;
     }
 
-    public String getScheduleDate() {
-        return scheduleDate;
+    /*
+    ファイル読み出し、ファイル書き出しで既存のTaskItemを操作する時に使用する
+     */
+    public TaskItem(Calendar calendar, int taskNum , String taskTitle, String repeatPattern , String doTime , Boolean executeStatus , Boolean repeatFlag) throws NullPointerException{
+        this.calendar = calendar;
+        this.scheduleDateString = String.valueOf(calendar.get(Calendar.YEAR)+calendar.get(Calendar.MONTH)+calendar.get(Calendar.DAY_OF_MONTH));
+        this.taskNum = taskNum;
+        this.taskTitle = taskTitle;
+        this.repeatPattern = repeatPattern;
+        this.doTime = doTime;
+        this.executeStatus = executeStatus ;
+        this.repeatFlag = repeatFlag;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public String getScheduleDateString() {
+        return scheduleDateString;
     }
 
     public String getTaskTitle() {
         return taskTitle;
     }
 
-    public String getTaskInterval() {
-        return taskInterval;
+    public String getRepeatPattern() {
+        return repeatPattern;
     }
 
     public int getTaskNum() {
@@ -56,5 +83,13 @@ public class TaskItem {
 
     public String getDoTime() {
         return doTime;
+    }
+
+    public Boolean getExecuteStatus() {
+        return executeStatus;
+    }
+
+    public Boolean getRepeatFlag() {
+        return repeatFlag;
     }
 }

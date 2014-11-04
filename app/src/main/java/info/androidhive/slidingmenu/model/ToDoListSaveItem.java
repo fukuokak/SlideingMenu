@@ -25,35 +25,22 @@ public class ToDoListSaveItem {
     private String toDoListSaveItemString ;
     private boolean toDoListSaveItemDoCheckBox ;
 
-    public ToDoListSaveItem(Activity activity , TaskItem taskItem,boolean taskItemDo){
+    public ToDoListSaveItem(Activity activity , TaskItem taskItem){
         this.activity = activity ;
-        this.toDoListSaveItemKey = taskItem.getScheduleDate() +',' +taskItem.getTaskNum();
-        this.toDoListSaveItemString = taskItem.getTaskTitle()+',' +taskItem.getTaskInterval();
-        this.toDoListSaveItemDoCheckBox = taskItemDo ;
+        this.toDoListSaveItemKey = taskItem.getScheduleDateString() +',' +taskItem.getTaskNum();
+        this.toDoListSaveItemString = taskItem.getTaskTitle()+',' +taskItem.getRepeatPattern();
+        this.toDoListSaveItemDoCheckBox = taskItem.getExecuteStatus() ;
     }
 
     public ToDoListSaveItem(Activity activity , ArrayList<TaskItem> taskItemArray , boolean[] taskItemDo) {
 
     }
-
-     public String getToDoListSaveItemKey() {
-        return toDoListSaveItemKey;
-    }
-
-    public String getToDoListSaveItemString() {
-        return toDoListSaveItemString;
-    }
-
-    public boolean isToDoListSaveItemDoCheckBox() {
-        return toDoListSaveItemDoCheckBox;
-    }
-
     public void saveFile() throws FileNotFoundException, UnsupportedEncodingException {
 
         try {
             OutputStream out = activity.openFileOutput("a.txt", Activity.MODE_PRIVATE);
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(out, "UTF-8"));
-            writer.append(getToDoListSaveItemKey()+","+getToDoListSaveItemString()+","+isToDoListSaveItemDoCheckBox());
+            writer.append(toDoListSaveItemKey+","+toDoListSaveItemString+","+toDoListSaveItemDoCheckBox);
             writer.close();
         } catch (UnsupportedEncodingException e){
             e.printStackTrace();

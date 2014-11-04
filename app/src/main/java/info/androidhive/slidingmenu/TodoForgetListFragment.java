@@ -20,6 +20,7 @@ import info.androidhive.slidingmenu.adapter.TaskItemListAdapter;
 import info.androidhive.slidingmenu.listener.ToDoListFragmentButtonListener;
 import info.androidhive.slidingmenu.listener.toDoListItemOnItemClickListener;
 import info.androidhive.slidingmenu.model.TaskItem;
+import info.androidhive.slidingmenu.model.UnDoneTask;
 
 /**
  * Created by fukuokak on 2014/10/29.
@@ -55,7 +56,10 @@ public class TodoForgetListFragment extends Fragment {
     }
 
     public TaskItemListAdapter setNotDoneTaskItemAdapter() {
-        ArrayList<TaskItem> taskItemArrayList = new ArrayList<TaskItem>();
+//        ArrayList<TaskItem> taskItemArrayList = new ArrayList<TaskItem> ;
+        UnDoneTask unDoneTasks = new UnDoneTask(getActivity());
+        ArrayList<TaskItem> taskItemArrayList = unDoneTasks.getUnDoneTask(Calendar.getInstance());
+
 
         //Todo ここはCalendarクラスを使用しなければならない？かMainActivityから引き渡しをする。
         Calendar calendar =Calendar.getInstance();
