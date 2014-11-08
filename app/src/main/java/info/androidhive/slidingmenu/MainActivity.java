@@ -71,6 +71,9 @@ public class MainActivity extends Activity {
         for (Integer n = 0; n < ciArray.size() ; n++){
             navDrawerItems.add(new NavDrawerItem(ciArray.get(n).getListText(), navMenuIcons.getResourceId(6, -1)));
         }
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(6, -1)));
+
+
 		// Home
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
 		// Find People
@@ -182,12 +185,10 @@ public class MainActivity extends Activity {
                 fragment = new UnDoneListFragment();
                 break;
 
-		case 8:
-			fragment = new HomeFragment();
-			break;
-		case 9:
-			fragment = new FindPeopleFragment();
-			break;
+        case 9:
+                fragment = new AddTaskItemFragment();
+                break;
+
 		case 10:
 			fragment = new PhotosFragment();
 			break;
@@ -200,7 +201,8 @@ public class MainActivity extends Activity {
 		case 13:
 			fragment = new WhatsHotFragment();
 			break;
-		default:
+
+            default:
             fragment = new TodoListFragment();
 
 //ToDo : must to put ciArray[position] to Next Fragment

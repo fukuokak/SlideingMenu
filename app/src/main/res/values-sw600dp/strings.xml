@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="addtaskitem_title">Add Task Item</string>
+    <string name="add_task_item_view_title">Add Task Item</string>
+</resources>

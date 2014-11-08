@@ -19,10 +19,11 @@ public class TaskItem {
     private String doTime;
     private Boolean executeStatus;
 
-    public static String TASK_INTERVAL_DAILY = "DAILY  ";
-    public static String TASK_INTERVAL_WEEKLY = "WEEKLY ";
+    public static String TASK_INTERVAL_DAILY = "DAILY";
+    public static String TASK_INTERVAL_WEEKLY = "WEEKLY";
     public static String TASK_INTERVAL_MONTHLY = "MONTHLY";
-    public static String TASK_INTERVAL_YEARLY = "YEARLY ";
+    public static String TASK_INTERVAL_YEARLY =   "YEARLY";
+    public static String TASK_INTERVAL_NO_REPEAT = "NO";
 
     /*
     *新規のTaskItemを生成するときに使用する。
@@ -35,7 +36,8 @@ public class TaskItem {
         if (repeatPattern.equals(TASK_INTERVAL_DAILY) ||
                 repeatPattern.equals(TASK_INTERVAL_WEEKLY) ||
                 repeatPattern.equals(TASK_INTERVAL_MONTHLY) ||
-                repeatPattern.equals(TASK_INTERVAL_YEARLY)) {
+                repeatPattern.equals(TASK_INTERVAL_YEARLY)||
+                repeatPattern.equals(TASK_INTERVAL_NO_REPEAT)) {
             this.repeatPattern = repeatPattern;
         } else {
             throw new NullPointerException

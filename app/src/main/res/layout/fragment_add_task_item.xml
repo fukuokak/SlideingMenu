@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/add_task_item_frame">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_task_item_view_title"
+        android:id="@+id/textView" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Button"
+        android:id="@+id/add_task_item_add_button"
+        android:layout_gravity="right" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_task_item_title"
+            android:id="@+id/add_task_item_task_title_label" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_task_item_task_title_value"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/add_task_item_task_repeat_group">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Repeat"
+            android:id="@+id/add_task_item_task_repeat_no_repeat" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DAILY"
+            android:id="@+id/add_task_item_task_repeat_daily" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WEEKLY"
+            android:id="@+id/add_task_item_task_repeat_weekly" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MONTHLY"
+            android:id="@+id/add_task_item_task_repeat_monthly" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YEARLY"
+            android:id="@+id/add_task_item_task_repeat_year" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:id="@+id/add_task_item_task_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/list_divider"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/add_task_item_task_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:spinnerMode="dropdown"
+            android:textColor="@color/list_divider" />
+    </LinearLayout>
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnersShown="true"
+        android:calendarViewShown="false"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
