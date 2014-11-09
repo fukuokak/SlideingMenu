@@ -3,6 +3,7 @@ package info.androidhive.slidingmenu.model;
 import android.content.res.Resources;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.Date;
 /**
  * Created by fukuokak on 2014/10/24.
  */
-public class TaskItem {
+public class TaskItem{
     private Calendar calendar;
     private String scheduleDateString;
     private int taskNum;
@@ -28,21 +29,23 @@ public class TaskItem {
     /*
     *新規のTaskItemを生成するときに使用する。
      */
-    public TaskItem(Calendar calendar, int taskNum, String taskTitle, String repeatPattern, String doTime) throws NullPointerException {
-        this.calendar = calendar;
-        this.scheduleDateString = String.valueOf(calendar.get(Calendar.YEAR) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.DAY_OF_MONTH));
-        this.taskNum = taskNum;
-        this.taskTitle = taskTitle;
-        if (repeatPattern.equals(TASK_INTERVAL_DAILY) ||
-                repeatPattern.equals(TASK_INTERVAL_WEEKLY) ||
-                repeatPattern.equals(TASK_INTERVAL_MONTHLY) ||
-                repeatPattern.equals(TASK_INTERVAL_YEARLY)||
-                repeatPattern.equals(TASK_INTERVAL_NO_REPEAT)) {
-            this.repeatPattern = repeatPattern;
-        } else {
-            throw new NullPointerException
-                    ("taskInterval is not match");
-        }
+        public TaskItem(Calendar calendar, int taskNum, String taskTitle, String repeatPattern, String doTime) throws NullPointerException {
+            Date date = calendar.getTime();
+            this.calendar = calendar;
+            int monthString = calendar.get(Calendar.MONTH) + 1;
+            this.scheduleDateString = String.valueOf(calendar.get(Calendar.YEAR) + "/" + monthString + "/" + calendar.get(Calendar.DAY_OF_MONTH));
+            this.taskNum = taskNum;
+            this.taskTitle = taskTitle;
+            if (repeatPattern.equals(TASK_INTERVAL_DAILY) ||
+                    repeatPattern.equals(TASK_INTERVAL_WEEKLY) ||
+                    repeatPattern.equals(TASK_INTERVAL_MONTHLY) ||
+                    repeatPattern.equals(TASK_INTERVAL_YEARLY)||
+                    repeatPattern.equals(TASK_INTERVAL_NO_REPEAT)) {
+                this.repeatPattern = repeatPattern;
+            } else {
+                throw new NullPointerException
+                        ("taskInterval is not match");
+            }
         this.doTime = doTime;
         this.executeStatus = false;
     }
@@ -52,7 +55,8 @@ public class TaskItem {
      */
     public TaskItem(Calendar calendar, int taskNum, String taskTitle, String repeatPattern, String doTime, Boolean executeStatus) throws NullPointerException {
         this.calendar = calendar;
-        this.scheduleDateString = String.valueOf(calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DAY_OF_MONTH));
+        int monthString = calendar.get(Calendar.MONTH) + 1;
+        this.scheduleDateString = String.valueOf(calendar.get(Calendar.YEAR) + "/" + monthString + "/" + calendar.get(Calendar.DAY_OF_MONTH));
         this.taskNum = taskNum;
         this.taskTitle = taskTitle;
         this.repeatPattern = repeatPattern;

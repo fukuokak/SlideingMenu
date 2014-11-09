@@ -1,5 +1,8 @@
 package info.androidhive.slidingmenu.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Calendar;
 
 /**
@@ -20,10 +23,10 @@ public class CalendarItem {
     public CalendarItem(Calendar calendar) {
         this.calendar = calendar ;
         this.year = calendar.get(Calendar.YEAR);
-        this.month = calendar.get(Calendar.MONTH) + 1;
+        this.month = calendar.get(Calendar.MONTH);
         this.day = calendar.get(Calendar.DATE);
         this.dayName = calendar.get(Calendar.DAY_OF_WEEK);
-        this.listText = month.toString() + "/"
+        this.listText = String.valueOf(month+1) + "/"
                 + day.toString() + "(" + week_name[dayName] + ")";
         this.dayNameFlag = week_name[dayName];
     }

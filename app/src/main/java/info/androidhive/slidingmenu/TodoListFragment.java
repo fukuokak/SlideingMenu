@@ -26,6 +26,7 @@ import java.util.Date;
 import info.androidhive.slidingmenu.adapter.TaskItemListAdapter;
 import info.androidhive.slidingmenu.listener.ToDoListFragmentButtonListener;
 import info.androidhive.slidingmenu.listener.toDoListItemOnItemClickListener;
+import info.androidhive.slidingmenu.model.CalendarItem;
 import info.androidhive.slidingmenu.model.TaskItem;
 import info.androidhive.slidingmenu.model.ToDoListSaveItem;
 
@@ -35,6 +36,8 @@ import info.androidhive.slidingmenu.model.ToDoListSaveItem;
 public class TodoListFragment extends Fragment {
     ListView toDoList;
     View rootView;
+    ArrayList<CalendarItem> ciArray;
+    private int position;
 
     public TodoListFragment() {
     }
@@ -56,10 +59,12 @@ public class TodoListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        this.ciArray = (ArrayList<CalendarItem>) this.getArguments().get(Config.PUT_EXTRA_CALENDAR_ITEM);
+        this.position = this.getArguments().getInt(Config.PUT_EXTRA_POSITION);
         toDoList = (ListView) rootView.findViewById(R.id.toDoListView);
 
         try {
-            toDoList.setAdapter(setInitialTaskItemAdapter());
+            toDoList.setAdapter(setInitialTaskItemAdapter(ciArray.get(this.position - 1)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -70,17 +75,15 @@ public class TodoListFragment extends Fragment {
 
     }
 
-    public TaskItemListAdapter setInitialTaskItemAdapter() throws IOException {
+    public TaskItemListAdapter setInitialTaskItemAdapter(CalendarItem calendarItem) throws IOException {
 
-        //Todo ここはStabコード
-        Calendar calendar =Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR,calendarItem.getYear());
+        calendar.set(Calendar.MONTH,calendarItem.getMonth());
+        calendar.set(Calendar.DAY_OF_MONTH,calendarItem.getDay());
+
         ToDoListSaveItem tsi = new ToDoListSaveItem(getActivity());
         ArrayList<TaskItem> taskItemArrayList = tsi.getInitialTaskItem(calendar);
-
-        TaskItem ti1 = new TaskItem(calendar, 1, "睡眠", TaskItem.TASK_INTERVAL_DAILY, "00:00");
-        TaskItem ti2 = new TaskItem(calendar, 2, "朝ごはん", TaskItem.TASK_INTERVAL_YEARLY, "12:00");
-        taskItemArrayList.add(ti1);
-        taskItemArrayList.add(ti2);
 
         for(int i = 0 ; i < taskItemArrayList.size() ; i++){
             tsi.saveTaskItem(taskItemArrayList.get(i));

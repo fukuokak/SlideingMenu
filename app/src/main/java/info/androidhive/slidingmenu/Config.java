@@ -5,4 +5,6 @@ package info.androidhive.slidingmenu;
  */
 public class Config {
     public static final String TASK_FILE_NAME = "TaskFile1.txt";
+    public static final String PUT_EXTRA_CALENDAR_ITEM = "CALENDAR_ITEM";
+    public static final String PUT_EXTRA_POSITION = "POSITION";
 }

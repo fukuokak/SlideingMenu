@@ -24,186 +24,190 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
-	private DrawerLayout mDrawerLayout;
-	private ListView mDrawerList;
-	private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
 
-	// nav drawer title
-	private CharSequence mDrawerTitle;
+    // nav drawer title
+    private CharSequence mDrawerTitle;
 
-	// used to store app title
-	private CharSequence mTitle;
+    // used to store app title
+    private CharSequence mTitle;
 
-	// slide menu items
-	private String[] navMenuTitles;
-	private TypedArray navMenuIcons;
+    // slide menu items
+    private String[] navMenuTitles;
+    private TypedArray navMenuIcons;
 
-	private ArrayList<NavDrawerItem> navDrawerItems;
-	private NavDrawerListAdapter adapter;
+    private ArrayList<NavDrawerItem> navDrawerItems;
+    private NavDrawerListAdapter adapter;
 
-    private ArrayList<CalendarItem> ciArray ;
+    private ArrayList<CalendarItem> ciArray;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-		mTitle = mDrawerTitle = getTitle();
+        mTitle = mDrawerTitle = getTitle();
 
-		// load slide menu items
-		navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+        // load slide menu items
+        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
 
-		// nav drawer icons from resources
-		navMenuIcons = getResources()
-				.obtainTypedArray(R.array.nav_drawer_icons);
+        // nav drawer icons from resources
+        navMenuIcons = getResources()
+                .obtainTypedArray(R.array.nav_drawer_icons);
 
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
-		navDrawerItems = new ArrayList<NavDrawerItem>();
+        navDrawerItems = new ArrayList<NavDrawerItem>();
         CalendarItemArray calendarItemArray = new CalendarItemArray(Calendar.getInstance());
         ciArray = calendarItemArray.getCalendarItemArray();
 
-		// adding nav drawer items to array
+        // adding nav drawer items to array
         // Daily Schedule
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
 
-        for (Integer n = 0; n < ciArray.size() ; n++){
+        for (Integer n = 0; n < ciArray.size(); n++) {
             navDrawerItems.add(new NavDrawerItem(ciArray.get(n).getListText(), navMenuIcons.getResourceId(6, -1)));
         }
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(6, -1)));
 
 
-		// Home
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
-		// Find People
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-		// Photos
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
-		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
-		// Pages
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
-		// What's hot, We  will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
-		
+        // Home
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
+        // Find People
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
+        // Photos
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+        // Communities, Will add a counter here
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
+        // Pages
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
+        // What's hot, We  will add a counter here
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
 
-		// Recycle the typed array
-		navMenuIcons.recycle();
 
-		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
+        // Recycle the typed array
+        navMenuIcons.recycle();
 
-		// setting the nav drawer list adapter
-		adapter = new NavDrawerListAdapter(getApplicationContext(),
-				navDrawerItems);
-		mDrawerList.setAdapter(adapter);
+        mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
-		// enabling action bar app icon and behaving it as toggle button
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setHomeButtonEnabled(true);
+        // setting the nav drawer list adapter
+        adapter = new NavDrawerListAdapter(getApplicationContext(),
+                navDrawerItems);
+        mDrawerList.setAdapter(adapter);
 
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.drawable.ic_drawer, //nav menu toggle icon
-				R.string.app_name, // nav drawer open - description for accessibility
-				R.string.app_name // nav drawer close - description for accessibility
-		) {
-			public void onDrawerClosed(View view) {
-				getActionBar().setTitle(mTitle);
-				// calling onPrepareOptionsMenu() to show action bar icons
-				invalidateOptionsMenu();
-			}
+        // enabling action bar app icon and behaving it as toggle button
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
-			public void onDrawerOpened(View drawerView) {
-				getActionBar().setTitle(mDrawerTitle);
-				// calling onPrepareOptionsMenu() to hide action bar icons
-				invalidateOptionsMenu();
-			}
-		};
-		mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.drawable.ic_drawer, //nav menu toggle icon
+                R.string.app_name, // nav drawer open - description for accessibility
+                R.string.app_name // nav drawer close - description for accessibility
+        ) {
+            public void onDrawerClosed(View view) {
+                getActionBar().setTitle(mTitle);
+                // calling onPrepareOptionsMenu() to show action bar icons
+                invalidateOptionsMenu();
+            }
 
-		if (savedInstanceState == null) {
-			// on first time display view for first nav item
-			displayView(0);
-		}
-	}
+            public void onDrawerOpened(View drawerView) {
+                getActionBar().setTitle(mDrawerTitle);
+                // calling onPrepareOptionsMenu() to hide action bar icons
+                invalidateOptionsMenu();
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-	/**
-	 * Slide menu item click listener
-	 * */
-	private class SlideMenuClickListener implements
-			ListView.OnItemClickListener {
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			// display view for selected nav drawer item
-			displayView(position);
-		}
-	}
+        if (savedInstanceState == null) {
+            // on first time display view for first nav item
+            displayView(0);
+        }
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+    /**
+     * Slide menu item click listener
+     */
+    private class SlideMenuClickListener implements
+            ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+            // display view for selected nav drawer item
+            displayView(position);
+        }
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// toggle nav drawer on selecting action bar app icon/title
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-		// Handle action bar actions click
-		switch (item.getItemId()) {
-		case R.id.action_settings:
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-	/* *
-	 * Called when invalidateOptionsMenu() is triggered
-	 */
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		// if nav drawer is opened, hide the action items
-		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
-		return super.onPrepareOptionsMenu(menu);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // toggle nav drawer on selecting action bar app icon/title
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle action bar actions click
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-	/**
-	 * Diplaying fragment view for selected nav drawer list item
-	 * */
-	private void displayView(int position) {
+    /* *
+     * Called when invalidateOptionsMenu() is triggered
+     */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // if nav drawer is opened, hide the action items
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
-		// update the main content by replacing fragments
-		Fragment fragment = null;
-        Bundle bundle = new Bundle();
-		switch (position) {
-        case 0:
+    /**
+     * Diplaying fragment view for selected nav drawer list item
+     */
+    private void displayView(int position) {
+
+        // update the main content by replacing fragments
+        Fragment fragment = null;
+        switch (position) {
+            case 0:
                 fragment = new UnDoneListFragment();
                 break;
 
-        case 9:
+            case 9:
                 fragment = new AddTaskItemFragment();
                 break;
 
-		case 10:
-			fragment = new PhotosFragment();
-			break;
-		case 11:
-			fragment = new CommunityFragment();
-			break;
-		case 12:
-			fragment = new PagesFragment();
-			break;
-		case 13:
-			fragment = new WhatsHotFragment();
-			break;
+            case 10:
+                fragment = new PhotosFragment();
+                break;
+            case 11:
+                fragment = new CommunityFragment();
+                break;
+            case 12:
+                fragment = new PagesFragment();
+                break;
+            case 13:
+                fragment = new WhatsHotFragment();
+                break;
 
             default:
-            fragment = new TodoListFragment();
+                fragment = new TodoListFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Config.PUT_EXTRA_CALENDAR_ITEM, ciArray);
+                bundle.putInt(Config.PUT_EXTRA_POSITION ,position);
+                fragment.setArguments(bundle);
+
 
 //ToDo : must to put ciArray[position] to Next Fragment
 //          ex)  CalendarItem extends Parcelable
@@ -213,50 +217,50 @@ public class MainActivity extends Activity {
 //            bundle.putString("category_01", "タンゴ");
 //            bundle.putString("category_02", "イエーガー");
 //            fragment.setArguments(bundle);
-            break;
-		}
+                break;
+        }
 
-		if (fragment != null) {
+        if (fragment != null) {
 
-			FragmentManager fragmentManager = getFragmentManager();
-			fragmentManager.beginTransaction()
-					.replace(R.id.frame_container, fragment).commit();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frame_container, fragment).commit();
 
-			// update selected item and title, then close the drawer
-			mDrawerList.setItemChecked(position, true);
-			mDrawerList.setSelection(position);
+            // update selected item and title, then close the drawer
+            mDrawerList.setItemChecked(position, true);
+            mDrawerList.setSelection(position);
 //			setTitle(navMenuTitles[position]);
             setTitle("Forgetful Person");
-			mDrawerLayout.closeDrawer(mDrawerList);
-		} else {
-			// error in creating fragment
-			Log.e("MainActivity", "Error in creating fragment");
-		}
-	}
+            mDrawerLayout.closeDrawer(mDrawerList);
+        } else {
+            // error in creating fragment
+            Log.e("MainActivity", "Error in creating fragment");
+        }
+    }
 
-	@Override
-	public void setTitle(CharSequence title) {
-		mTitle = title;
-		getActionBar().setTitle(mTitle);
-	}
+    @Override
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        getActionBar().setTitle(mTitle);
+    }
 
-	/**
-	 * When using the ActionBarDrawerToggle, you must call it during
-	 * onPostCreate() and onConfigurationChanged()...
-	 */
+    /**
+     * When using the ActionBarDrawerToggle, you must call it during
+     * onPostCreate() and onConfigurationChanged()...
+     */
 
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-		// Sync the toggle state after onRestoreInstanceState has occurred.
-		mDrawerToggle.syncState();
-	}
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
 
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		// Pass any configuration change to the drawer toggls
-		mDrawerToggle.onConfigurationChanged(newConfig);
-	}
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggls
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
 
 }

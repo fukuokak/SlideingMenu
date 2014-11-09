@@ -29,6 +29,7 @@ public class UnDoneTask {
 
     private ArrayList<TaskItem> readTaskFile(String taskFileName) {
         ArrayList<TaskItem> unDoneTasks = new ArrayList<TaskItem>();
+        CalendarUtil cutil = new CalendarUtil();
 
             try {
                 InputStream in = activity.openFileInput(taskFileName);
@@ -37,9 +38,9 @@ public class UnDoneTask {
                     String s;
                     while ((s = reader.readLine()) != null) {
                         TaskItem unDoneTaskItem = convertSaveFormatToTaskItem(s);
-                        int diff = unDoneTaskItem.getCalendar().compareTo(Calendar.getInstance());
+                        int diff = cutil.compareCalendar(unDoneTaskItem.getCalendar(),Calendar.getInstance());
                         //現在日時以前、かつ、実行状況が未完了のTask
-                        if (diff > 0 &&
+                        if (diff < 0 &&
                                 unDoneTaskItem.getExecuteStatus() == false) {
                     unDoneTasks.add(unDoneTaskItem);
                 }
@@ -60,9 +61,9 @@ public class UnDoneTask {
         String[] sc = ss[0].split("/", -1);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.YEAR,  Integer.valueOf(sc[0]));
-        calendar.add(Calendar.MONTH, Integer.valueOf(sc[1])-1);
-        calendar.add(Calendar.DAY_OF_MONTH, Integer.valueOf(sc[2]));
+        calendar.set(Calendar.YEAR,  Integer.valueOf(sc[0]));
+        calendar.set(Calendar.MONTH, Integer.valueOf(sc[1])-1);
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(sc[2]));
 
         TaskItem taskItem = new TaskItem(
                 calendar,

@@ -29,6 +29,7 @@ import info.androidhive.slidingmenu.Config;
 public class ToDoListSaveItem {
 
     private Activity activity;
+    private CalendarUtil cUtil = new CalendarUtil();
 
     public ToDoListSaveItem(Activity activity) {
         this.activity = activity;
@@ -43,7 +44,7 @@ public class ToDoListSaveItem {
             while ((s = reader.readLine()) != null) {
                 TaskItem ti = convertSaveFormatToTaskItem(s);
                 //Todoここのカレンダーの日付は選択した日付と比較したい
-                int diff = ti.getCalendar().compareTo(Calendar.getInstance());
+                int diff = cUtil.compareCalendar(ti.getCalendar(),calendar);
                 if (diff == 0) {
                     TaskItems.add(ti);
                 }
@@ -90,9 +91,9 @@ public class ToDoListSaveItem {
         }
         String[] sc = ss[0].split("/", -1);
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.YEAR, Integer.valueOf(sc[0]));
-        calendar.add(Calendar.MONTH, Integer.valueOf(sc[1]) - 1);
-        calendar.add(Calendar.DAY_OF_MONTH, Integer.valueOf(sc[2]));
+        calendar.set(Calendar.YEAR, Integer.valueOf(sc[0]));
+        calendar.set(Calendar.MONTH, Integer.valueOf(sc[1]) - 1);
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(sc[2]));
 
         TaskItem taskItem = new TaskItem(
                 calendar,
