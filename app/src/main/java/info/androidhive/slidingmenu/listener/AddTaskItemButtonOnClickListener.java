@@ -12,6 +12,7 @@ import java.util.Calendar;
 
 import info.androidhive.slidingmenu.AddTaskItemFragment;
 import info.androidhive.slidingmenu.R;
+import info.androidhive.slidingmenu.model.CalendarUtil;
 import info.androidhive.slidingmenu.model.TaskItem;
 import info.androidhive.slidingmenu.model.ToDoTask;
 
@@ -63,8 +64,9 @@ public class AddTaskItemButtonOnClickListener implements View.OnClickListener {
         calendar.set(Calendar.YEAR, datePicker.getYear());
         calendar.set(Calendar.MONTH, datePicker.getMonth());
         calendar.set(Calendar.DAY_OF_MONTH, datePicker.getDayOfMonth());
+        CalendarUtil cUtil = new CalendarUtil();
 
-        TaskItem taskItem = new TaskItem(calendar, TitleValue, repeatFragValue, hourSpinValue + minutesSpinValue);
+        TaskItem taskItem = new TaskItem(calendar, cUtil.generateTimeStamp(), TitleValue, repeatFragValue, hourSpinValue + minutesSpinValue);
 
         ToDoTask tdls = new ToDoTask(activity);
         tdls.saveTaskItem(taskItem);
