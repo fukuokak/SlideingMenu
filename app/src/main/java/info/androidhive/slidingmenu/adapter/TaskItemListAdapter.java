@@ -44,10 +44,10 @@ public class TaskItemListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView taskNum ;
+        TextView taskDoTime ;
         TextView taskTitle;
         TextView taskInterval;
-        CheckBox doneCheckBox ;
+        CheckBox taskDoneCheckBox ;
         View view = convertView;
 
         if (view == null){
@@ -56,13 +56,16 @@ public class TaskItemListAdapter extends BaseAdapter {
         }
         TaskItem taskItem = getItem(position);
         if (taskItem != null){
-            taskNum = (TextView)view.findViewById(R.id.taskNum);
+            taskDoTime = (TextView)view.findViewById(R.id.taskNum);
             taskTitle =  (TextView)view.findViewById(R.id.taskTitle);
             taskInterval= (TextView)view.findViewById(R.id.taskInterval);
+            taskDoneCheckBox = (CheckBox)view.findViewById(R.id.doCheckBox);
 
-            taskNum.setText(Integer.toString(taskItem.getTaskNum()));
+            taskDoTime.setText(taskItem.getDoTime().toString());
             taskTitle.setText(taskItem.getTaskTitle());
             taskInterval.setText(taskItem.getRepeatPattern());
+            taskDoneCheckBox.setChecked(taskItem.getExecuteStatus());
+
         }
         return view;
     }

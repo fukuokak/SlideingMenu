@@ -39,9 +39,9 @@ public class UnDoneTask {
                     while ((s = reader.readLine()) != null) {
                         TaskItem unDoneTaskItem = convertSaveFormatToTaskItem(s);
                         int diff = cutil.compareCalendar(unDoneTaskItem.getCalendar(),Calendar.getInstance());
-                        //現在日時以前、かつ、実行状況が未完了のTask
-                        if (diff < 0 &&
-                                unDoneTaskItem.getExecuteStatus() == false) {
+                        if (diff < 0 ){
+//Todo 終了いるものを表示しない場合はここをコメントアウトを解除
+//                                && unDoneTaskItem.getExecuteStatus() == false) {
                     unDoneTasks.add(unDoneTaskItem);
                 }
             }
@@ -51,6 +51,8 @@ public class UnDoneTask {
         }
         return unDoneTasks;
     }
+
+
 
     private TaskItem convertSaveFormatToTaskItem(String s) {
 
@@ -67,7 +69,7 @@ public class UnDoneTask {
 
         TaskItem taskItem = new TaskItem(
                 calendar,
-                Integer.valueOf(ss[1].toString()),
+                Long.parseLong(ss[1].toString()),
                 ss[2].toString(),
                 ss[3].toString(),
                 ss[4].toString(),

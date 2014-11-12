@@ -202,21 +202,11 @@ public class MainActivity extends Activity {
                 break;
 
             default:
-                fragment = new TodoListFragment();
+                fragment = new ToDoListFragment();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Config.PUT_EXTRA_CALENDAR_ITEM, ciArray);
                 bundle.putInt(Config.PUT_EXTRA_POSITION ,position);
                 fragment.setArguments(bundle);
-
-
-//ToDo : must to put ciArray[position] to Next Fragment
-//          ex)  CalendarItem extends Parcelable
-//            Bundleを設定してFragmentの初期値を渡す
-//            Bundle bundle = new Bundle();
-//            bundle.put("day",ciArray[position]);
-//            bundle.putString("category_01", "タンゴ");
-//            bundle.putString("category_02", "イエーガー");
-//            fragment.setArguments(bundle);
                 break;
         }
 
@@ -226,14 +216,12 @@ public class MainActivity extends Activity {
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_container, fragment).commit();
 
-            // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);
 //			setTitle(navMenuTitles[position]);
             setTitle("Forgetful Person");
             mDrawerLayout.closeDrawer(mDrawerList);
         } else {
-            // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
         }
     }
