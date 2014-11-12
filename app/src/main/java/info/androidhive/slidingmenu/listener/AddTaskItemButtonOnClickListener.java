@@ -5,17 +5,15 @@ import android.app.FragmentManager;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import info.androidhive.slidingmenu.AddTaskItemFragment;
 import info.androidhive.slidingmenu.R;
 import info.androidhive.slidingmenu.model.TaskItem;
-import info.androidhive.slidingmenu.model.ToDoListSaveItem;
+import info.androidhive.slidingmenu.model.ToDoTask;
 
 /**
  * Created by fukuokak on 2014/11/08.
@@ -44,7 +42,11 @@ public class AddTaskItemButtonOnClickListener implements View.OnClickListener {
         String repeatFragValue = getRepeatFragValue(radioId);
 
         if (repeatFragValue.equals(TaskItem.TASK_INTERVAL_NO_REPEAT)) {
-            saveNoRepeatTask( TitleValue, repeatFragValue, hourSpinValue , minutesSpinValue);
+            try {
+                saveNoRepeatTask( TitleValue, repeatFragValue, hourSpinValue , minutesSpinValue);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } else{
             saveRepeatTask(TitleValue, repeatFragValue, hourSpinValue , minutesSpinValue);
 
@@ -55,16 +57,16 @@ public class AddTaskItemButtonOnClickListener implements View.OnClickListener {
 
     }
 
-    private void saveNoRepeatTask(String TitleValue, String repeatFragValue, String hourSpinValue, String minutesSpinValue) {
+    private void saveNoRepeatTask(String TitleValue, String repeatFragValue, String hourSpinValue, String minutesSpinValue) throws InterruptedException {
         Calendar calendar = Calendar.getInstance();
         DatePicker datePicker = (DatePicker) activity.findViewById(R.id.datePicker);
         calendar.set(Calendar.YEAR, datePicker.getYear());
         calendar.set(Calendar.MONTH, datePicker.getMonth());
         calendar.set(Calendar.DAY_OF_MONTH, datePicker.getDayOfMonth());
 
-        TaskItem taskItem = new TaskItem(calendar, 1, TitleValue, repeatFragValue, hourSpinValue + minutesSpinValue);
+        TaskItem taskItem = new TaskItem(calendar, TitleValue, repeatFragValue, hourSpinValue + minutesSpinValue);
 
-        ToDoListSaveItem tdls = new ToDoListSaveItem(activity);
+        ToDoTask tdls = new ToDoTask(activity);
         tdls.saveTaskItem(taskItem);
 
     }

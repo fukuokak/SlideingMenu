@@ -26,34 +26,78 @@ import info.androidhive.slidingmenu.Config;
 /**
  * Created by fukuokak on 2014/10/25.
  */
-public class ToDoListSaveItem {
+public class ToDoTask {
 
     private Activity activity;
     private CalendarUtil cUtil = new CalendarUtil();
 
-    public ToDoListSaveItem(Activity activity) {
+    public ToDoTask(Activity activity) {
         this.activity = activity;
     }
 
     public ArrayList<TaskItem> getInitialTaskItem(Calendar calendar) throws IOException {
-        ArrayList<TaskItem> TaskItems = new ArrayList<TaskItem>();
+        ArrayList<TaskItem> taskItems = new ArrayList<TaskItem>();
         try {
             InputStream in = activity.openFileInput(Config.TASK_FILE_NAME);
             BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
             String s;
             while ((s = reader.readLine()) != null) {
                 TaskItem ti = convertSaveFormatToTaskItem(s);
-                //Todoここのカレンダーの日付は選択した日付と比較したい
-                int diff = cUtil.compareCalendar(ti.getCalendar(),calendar);
+                int diff = cUtil.compareCalendar(ti.getCalendar(), calendar);
                 if (diff == 0) {
-                    TaskItems.add(ti);
+                    taskItems.add(ti);
                 }
             }
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return TaskItems;
+        return taskItems;
+    }
+
+    public void updateTaskItem(TaskItem modifyTaskItem) {
+        ArrayList<TaskItem> taskItems = new ArrayList<TaskItem>();
+        Long modifyTaskItemNumber = modifyTaskItem.getTaskNum();
+
+        try {
+
+            InputStream in = activity.openFileInput(Config.TASK_FILE_NAME);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+            String s;
+            while ((s = reader.readLine()) != null) {
+                TaskItem ti = convertSaveFormatToTaskItem(s);
+                Long tiNum = ti.getTaskNum();
+                if (tiNum.equals(modifyTaskItemNumber)) {
+                } else {
+                    taskItems.add(ti);
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        taskItems.add(modifyTaskItem);
+        SaveTaskItems(taskItems);
+    }
+
+    public void SaveTaskItems(ArrayList<TaskItem> taskItems) {
+        try {
+            OutputStream out = activity.openFileOutput(Config.TASK_FILE_NAME, Activity.MODE_PRIVATE);
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(out, "UTF-8"));
+
+            for (int i = 0; i < taskItems.size(); i++) {
+                TaskItem taskItem = taskItems.get(i);
+                writer.append(convertTaskItemToSaveFormat(taskItem) + "\r\n");
+            }
+            writer.close();
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveTaskItem(TaskItem taskItem) {
@@ -97,7 +141,7 @@ public class ToDoListSaveItem {
 
         TaskItem taskItem = new TaskItem(
                 calendar,
-                Integer.valueOf(ss[1].toString()),
+                Long.parseLong(ss[1].toString()),
                 ss[2].toString(),
                 ss[3].toString(),
                 ss[4].toString(),

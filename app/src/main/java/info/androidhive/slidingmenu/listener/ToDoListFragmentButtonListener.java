@@ -1,33 +1,17 @@
 package info.androidhive.slidingmenu.listener;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.content.Intent;
-import android.database.DataSetObserver;
-import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import info.androidhive.slidingmenu.R;
-import info.androidhive.slidingmenu.TodoListFragment;
 import info.androidhive.slidingmenu.adapter.TaskItemListAdapter;
 import info.androidhive.slidingmenu.model.TaskItem;
-import info.androidhive.slidingmenu.model.ToDoListSaveItem;
+import info.androidhive.slidingmenu.model.ToDoTask;
 
 /**
  * Created by fukuokak on 2014/10/24.
@@ -67,7 +51,7 @@ public class ToDoListFragmentButtonListener implements View.OnClickListener {
     }
 
     public ArrayList<TaskItem> getTaskItem() throws IOException {
-        ToDoListSaveItem tsi = new ToDoListSaveItem(activity);
+        ToDoTask tsi = new ToDoTask(activity);
 
         ArrayList<TaskItem> taskItemArrayList = tsi.getInitialTaskItem(Calendar.getInstance());
 
