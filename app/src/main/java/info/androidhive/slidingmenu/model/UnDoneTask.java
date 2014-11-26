@@ -39,9 +39,8 @@ public class UnDoneTask {
                     while ((s = reader.readLine()) != null) {
                         TaskItem unDoneTaskItem = convertSaveFormatToTaskItem(s);
                         int diff = cutil.compareCalendar(unDoneTaskItem.getCalendar(),Calendar.getInstance());
-                        if (diff < 0 ){
-//Todo 終了いるものを表示しない場合はここをコメントアウトを解除
-//                                && unDoneTaskItem.getExecuteStatus() == false) {
+                        if (diff < 0
+                                && unDoneTaskItem.getExecuteStatus() == false) {
                     unDoneTasks.add(unDoneTaskItem);
                 }
             }

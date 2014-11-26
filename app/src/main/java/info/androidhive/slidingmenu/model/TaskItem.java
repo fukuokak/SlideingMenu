@@ -3,6 +3,8 @@ package info.androidhive.slidingmenu.model;
 import java.util.Calendar;
 import java.util.Date;
 
+import info.androidhive.slidingmenu.Config;
+
 /**
  * Created by fukuokak on 2014/10/24.
  */
@@ -15,12 +17,6 @@ public class TaskItem {
     private String doTime;
     private Boolean executeStatus;
 
-    public static String TASK_INTERVAL_DAILY = "DAILY";
-    public static String TASK_INTERVAL_WEEKLY = "WEEKLY";
-    public static String TASK_INTERVAL_MONTHLY = "MONTHLY";
-    public static String TASK_INTERVAL_YEARLY = "YEARLY";
-    public static String TASK_INTERVAL_NO_REPEAT = "NO";
-
     /*
     *新規のTaskItemを生成するときに使用する。
      */
@@ -31,11 +27,11 @@ public class TaskItem {
         this.scheduleDateString = String.valueOf(calendar.get(Calendar.YEAR) + "/" + monthString + "/" + calendar.get(Calendar.DAY_OF_MONTH));
         this.taskNum = taskNum;
         this.taskTitle = taskTitle;
-        if (repeatPattern.equals(TASK_INTERVAL_DAILY) ||
-                repeatPattern.equals(TASK_INTERVAL_WEEKLY) ||
-                repeatPattern.equals(TASK_INTERVAL_MONTHLY) ||
-                repeatPattern.equals(TASK_INTERVAL_YEARLY) ||
-                repeatPattern.equals(TASK_INTERVAL_NO_REPEAT)) {
+        if (repeatPattern.equals(Config.TASK_INTERVAL_DAILY) ||
+                repeatPattern.equals(Config.TASK_INTERVAL_WEEKLY) ||
+                repeatPattern.equals(Config.TASK_INTERVAL_MONTHLY) ||
+                repeatPattern.equals(Config.TASK_INTERVAL_YEARLY) ||
+                repeatPattern.equals(Config.TASK_INTERVAL_NO_REPEAT)) {
             this.repeatPattern = repeatPattern;
         } else {
             throw new NullPointerException
