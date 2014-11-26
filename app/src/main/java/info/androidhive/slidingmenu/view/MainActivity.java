@@ -1,5 +1,11 @@
-package info.androidhive.slidingmenu;
+package info.androidhive.slidingmenu.view;
 
+import info.androidhive.slidingmenu.CommunityFragment;
+import info.androidhive.slidingmenu.Config;
+import info.androidhive.slidingmenu.PagesFragment;
+import info.androidhive.slidingmenu.PhotosFragment;
+import info.androidhive.slidingmenu.R;
+import info.androidhive.slidingmenu.WhatsHotFragment;
 import info.androidhive.slidingmenu.adapter.NavDrawerListAdapter;
 import info.androidhive.slidingmenu.model.CalendarItem;
 import info.androidhive.slidingmenu.model.CalendarItemArray;

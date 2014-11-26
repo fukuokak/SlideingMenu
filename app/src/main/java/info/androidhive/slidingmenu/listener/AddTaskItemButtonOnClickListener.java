@@ -10,7 +10,7 @@ import android.widget.Spinner;
 
 import java.util.Calendar;
 
-import info.androidhive.slidingmenu.AddTaskItemFragment;
+import info.androidhive.slidingmenu.view.AddTaskItemFragment;
 import info.androidhive.slidingmenu.R;
 import info.androidhive.slidingmenu.model.CalendarUtil;
 import info.androidhive.slidingmenu.model.TaskItem;

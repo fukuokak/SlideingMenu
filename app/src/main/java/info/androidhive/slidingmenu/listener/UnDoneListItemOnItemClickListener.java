@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import info.androidhive.slidingmenu.R;
-import info.androidhive.slidingmenu.UnDoneListFragment;
+import info.androidhive.slidingmenu.view.UnDoneListFragment;
 import info.androidhive.slidingmenu.adapter.TaskItemListAdapter;
 import info.androidhive.slidingmenu.model.TaskItem;
 import info.androidhive.slidingmenu.model.ToDoTask;

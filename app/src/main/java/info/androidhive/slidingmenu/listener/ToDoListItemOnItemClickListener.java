@@ -1,12 +1,9 @@
 package info.androidhive.slidingmenu.listener;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.view.View;
 import android.widget.AdapterView;
 
-import info.androidhive.slidingmenu.R;
-import info.androidhive.slidingmenu.ToDoListFragment;
 import info.androidhive.slidingmenu.adapter.TaskItemListAdapter;
 import info.androidhive.slidingmenu.model.TaskItem;
 import info.androidhive.slidingmenu.model.ToDoTask;

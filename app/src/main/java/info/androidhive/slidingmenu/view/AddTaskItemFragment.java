@@ -1,4 +1,4 @@
-package info.androidhive.slidingmenu;
+package info.androidhive.slidingmenu.view;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Spinner;
 
 import java.util.Calendar;
 
+import info.androidhive.slidingmenu.R;
 import info.androidhive.slidingmenu.listener.AddTaskItemButtonOnClickListener;
 
 

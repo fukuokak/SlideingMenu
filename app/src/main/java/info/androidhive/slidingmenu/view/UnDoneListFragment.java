@@ -1,4 +1,4 @@
-package info.androidhive.slidingmenu;
+package info.androidhive.slidingmenu.view;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import info.androidhive.slidingmenu.R;
 import info.androidhive.slidingmenu.adapter.TaskItemListAdapter;
 import info.androidhive.slidingmenu.listener.UnDoneListItemOnItemClickListener;
 import info.androidhive.slidingmenu.model.TaskItem;
