@@ -48,31 +48,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No Repeat"
+            android:checked="true"
             android:id="@+id/add_task_item_task_repeat_no_repeat" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DAILY"
-            android:id="@+id/add_task_item_task_repeat_daily" />
+        <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="DAILY"-->
+            <!--android:id="@+id/add_task_item_task_repeat_daily" />-->
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WEEKLY"
-            android:id="@+id/add_task_item_task_repeat_weekly" />
+        <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="WEEKLY"-->
+            <!--android:id="@+id/add_task_item_task_repeat_weekly" />-->
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MONTHLY"
-            android:id="@+id/add_task_item_task_repeat_monthly" />
+        <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="MONTHLY"-->
+            <!--android:id="@+id/add_task_item_task_repeat_monthly" />-->
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="YEARLY"
-            android:id="@+id/add_task_item_task_repeat_year" />
+        <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="YEARLY"-->
+            <!--android:id="@+id/add_task_item_task_repeat_year" />-->
     </RadioGroup>
 
     <LinearLayout

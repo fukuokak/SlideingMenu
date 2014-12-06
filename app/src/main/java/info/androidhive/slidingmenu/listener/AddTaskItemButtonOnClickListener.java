@@ -10,6 +10,7 @@ import android.widget.Spinner;
 
 import java.util.Calendar;
 
+import info.androidhive.slidingmenu.Config;
 import info.androidhive.slidingmenu.view.AddTaskItemFragment;
 import info.androidhive.slidingmenu.R;
 import info.androidhive.slidingmenu.model.CalendarUtil;
@@ -42,7 +43,7 @@ public class AddTaskItemButtonOnClickListener implements View.OnClickListener {
         int radioId = repeatFlag.getCheckedRadioButtonId();
         String repeatFragValue = getRepeatFragValue(radioId);
 
-        if (repeatFragValue.equals(TaskItem.TASK_INTERVAL_NO_REPEAT)) {
+        if (repeatFragValue.equals(Config.TASK_INTERVAL_NO_REPEAT)) {
             try {
                 saveNoRepeatTask( TitleValue, repeatFragValue, hourSpinValue , minutesSpinValue);
             } catch (InterruptedException e) {
@@ -81,20 +82,22 @@ public class AddTaskItemButtonOnClickListener implements View.OnClickListener {
         String repeatFragValue = "";
         switch (radioId) {
             case R.id.add_task_item_task_repeat_no_repeat:
-                repeatFragValue = TaskItem.TASK_INTERVAL_NO_REPEAT;
+                repeatFragValue = Config.TASK_INTERVAL_NO_REPEAT;
                 break;
+/*
             case R.id.add_task_item_task_repeat_daily:
-                repeatFragValue = TaskItem.TASK_INTERVAL_DAILY;
+                repeatFragValue = Config.TASK_INTERVAL_DAILY;
                 break;
             case R.id.add_task_item_task_repeat_weekly:
-                repeatFragValue = TaskItem.TASK_INTERVAL_WEEKLY;
+                repeatFragValue = Config.TASK_INTERVAL_WEEKLY;
                 break;
             case R.id.add_task_item_task_repeat_monthly:
-                repeatFragValue = TaskItem.TASK_INTERVAL_MONTHLY;
+                repeatFragValue = Config.TASK_INTERVAL_MONTHLY;
                 break;
             case R.id.add_task_item_task_repeat_year:
-                repeatFragValue = TaskItem.TASK_INTERVAL_YEARLY;
+                repeatFragValue = Config.TASK_INTERVAL_YEARLY;
                 break;
+*/
             default:
                 break;
         }
