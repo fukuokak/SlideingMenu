@@ -71,7 +71,7 @@ public class ToDoListFragment extends Fragment {
         calendar.set(Calendar.DAY_OF_MONTH, calendarItem.getDay());
 
         ToDoTask toDoTask = new ToDoTask(getActivity());
-        ArrayList<TaskItem> taskItemArrayList = toDoTask.getInitialTaskItem(calendar);
+        ArrayList<TaskItem> taskItemArrayList = toDoTask.getTaskItems(calendar);
         TaskItemListAdapter todoAdapter = new TaskItemListAdapter(getActivity().getApplicationContext(),
                 taskItemArrayList);
         return todoAdapter;

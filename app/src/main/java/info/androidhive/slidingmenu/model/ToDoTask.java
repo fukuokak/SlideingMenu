@@ -1,16 +1,9 @@
 package info.androidhive.slidingmenu.model;
 
 import android.app.Activity;
-import android.content.Context;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,7 +28,7 @@ public class ToDoTask {
         this.activity = activity;
     }
 
-    public ArrayList<TaskItem> getInitialTaskItem(Calendar calendar) throws IOException {
+    public ArrayList<TaskItem> getTaskItems(Calendar calendar) throws IOException {
         ArrayList<TaskItem> taskItems = new ArrayList<TaskItem>();
         try {
             InputStream in = activity.openFileInput(Config.TASK_FILE_NAME);
@@ -77,10 +70,10 @@ public class ToDoTask {
             e.printStackTrace();
         }
         taskItems.add(modifyTaskItem);
-        SaveTaskItems(taskItems);
+        storeTaskItems(taskItems);
     }
 
-    public void SaveTaskItems(ArrayList<TaskItem> taskItems) {
+    public void storeTaskItems(ArrayList<TaskItem> taskItems) {
         try {
             OutputStream out = activity.openFileOutput(Config.TASK_FILE_NAME, Activity.MODE_PRIVATE);
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(out, "UTF-8"));

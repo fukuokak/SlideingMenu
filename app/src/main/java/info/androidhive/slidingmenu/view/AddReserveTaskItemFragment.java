@@ -36,17 +36,17 @@ public class AddReserveTaskItemFragment extends Fragment {
         ArrayAdapter<CharSequence> taskHourAdapter = ArrayAdapter.createFromResource(
                 getActivity().getApplicationContext(), R.array.task_hour,
                 R.layout.time_spinner);
-        taskHourAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        taskHourAdapter.setDropDownViewResource(R.layout.time_spinner_dropdown_item);
         hourSpin.setAdapter(taskHourAdapter);
 
         Spinner minutesSpin = (Spinner) rootView.findViewById(R.id.add_reserve_task_item_task_minutes);
         ArrayAdapter<CharSequence> taskMinutesAdapter = ArrayAdapter.createFromResource(
                 getActivity().getApplicationContext(), R.array.task_minutes,
                 R.layout.time_spinner);
-        taskMinutesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        taskMinutesAdapter.setDropDownViewResource(R.layout.time_spinner_dropdown_item);
         minutesSpin.setAdapter(taskMinutesAdapter);
 
-        View addTaskItemButton = rootView.findViewById(R.id.add_task_item_add_button);
+        View addTaskItemButton = rootView.findViewById(R.id.add_reserve_task_item_add_button);
         addTaskItemButton.setOnClickListener(new AddReserveTaskItemButtonOnClickListener(getActivity()));
 
         return rootView;

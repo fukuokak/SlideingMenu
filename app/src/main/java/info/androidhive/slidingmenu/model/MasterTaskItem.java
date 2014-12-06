@@ -8,16 +8,16 @@ import info.androidhive.slidingmenu.Config;
 /**
  * Created by fukuokak on 2014/11/26.
  */
-public class ReserveTaskItem {
+public class MasterTaskItem {
     private Long MasterTaskNum;
     private String taskTitle;
     private String repeatPattern;
-    private String[] theDay;
+    private Integer theDay;
     private String[] theWeekDay;
     private String doTime;
     private Boolean executeStatus;
 
-    public ReserveTaskItem(Long MasterTaskNum, String taskTitle, String repeatPattern, String[] theDay, String[] theWeekDay, String doTime) throws NullPointerException {
+    public MasterTaskItem(Long MasterTaskNum, String taskTitle, String repeatPattern, Integer theDay, String[] theWeekDay, String doTime) throws NullPointerException {
 
         this.MasterTaskNum = MasterTaskNum;
         this.taskTitle = taskTitle;
@@ -34,6 +34,5 @@ public class ReserveTaskItem {
         this.theWeekDay = theWeekDay;
         this.doTime = doTime;
     }
-
 
 }

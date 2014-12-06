@@ -41,18 +41,14 @@ public class AddTaskItemButtonOnClickListener implements View.OnClickListener {
 
         RadioGroup repeatFlag = (RadioGroup) activity.findViewById(R.id.add_task_item_task_repeat_group);
         int radioId = repeatFlag.getCheckedRadioButtonId();
-        String repeatFragValue = getRepeatFragValue(radioId);
+        String repeatFragValue = getRepeatFlagValue(radioId);
 
-        if (repeatFragValue.equals(Config.TASK_INTERVAL_NO_REPEAT)) {
-            try {
-                saveNoRepeatTask( TitleValue, repeatFragValue, hourSpinValue , minutesSpinValue);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } else{
-            saveRepeatTask(TitleValue, repeatFragValue, hourSpinValue , minutesSpinValue);
-
+        try {
+            saveNoRepeatTask(TitleValue, repeatFragValue, hourSpinValue, minutesSpinValue);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
         FragmentManager fragmentManager = activity.getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.frame_container, new AddTaskItemFragment()).commit();
@@ -78,30 +74,30 @@ public class AddTaskItemButtonOnClickListener implements View.OnClickListener {
 
     }
 
-    private String getRepeatFragValue(int radioId) {
-        String repeatFragValue = "";
+    private String getRepeatFlagValue(int radioId) {
+        String repeatFlagValue = "";
         switch (radioId) {
             case R.id.add_task_item_task_repeat_no_repeat:
-                repeatFragValue = Config.TASK_INTERVAL_NO_REPEAT;
+                repeatFlagValue = Config.TASK_INTERVAL_NO_REPEAT;
                 break;
 /*
             case R.id.add_task_item_task_repeat_daily:
-                repeatFragValue = Config.TASK_INTERVAL_DAILY;
+                repeatFlagValue = Config.TASK_INTERVAL_DAILY;
                 break;
             case R.id.add_task_item_task_repeat_weekly:
-                repeatFragValue = Config.TASK_INTERVAL_WEEKLY;
+                repeatFlagValue = Config.TASK_INTERVAL_WEEKLY;
                 break;
             case R.id.add_task_item_task_repeat_monthly:
-                repeatFragValue = Config.TASK_INTERVAL_MONTHLY;
+                repeatFlagValue = Config.TASK_INTERVAL_MONTHLY;
                 break;
             case R.id.add_task_item_task_repeat_year:
-                repeatFragValue = Config.TASK_INTERVAL_YEARLY;
+                repeatFlagValue = Config.TASK_INTERVAL_YEARLY;
                 break;
 */
             default:
                 break;
         }
-        return repeatFragValue;
+        return repeatFlagValue;
 
     }
 

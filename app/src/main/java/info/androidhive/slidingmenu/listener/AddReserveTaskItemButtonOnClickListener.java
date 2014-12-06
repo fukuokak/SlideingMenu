@@ -3,19 +3,12 @@ package info.androidhive.slidingmenu.listener;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-import java.util.Calendar;
-
 import info.androidhive.slidingmenu.Config;
 import info.androidhive.slidingmenu.R;
-import info.androidhive.slidingmenu.model.CalendarUtil;
-import info.androidhive.slidingmenu.model.ReserveTaskItem;
-import info.androidhive.slidingmenu.model.TaskItem;
-import info.androidhive.slidingmenu.model.ToDoTask;
 import info.androidhive.slidingmenu.view.AddTaskItemFragment;
 
 /**

@@ -22,14 +22,14 @@ public class UnDoneTask {
         this.activity = activity;
     }
 
-    public ArrayList<TaskItem> getUnDoneTask(Calendar today) {
+    public ArrayList<TaskItem> getUnDoneTasks(Calendar today) {
         ArrayList<TaskItem> unDoneTasks = readTaskFile(Config.TASK_FILE_NAME);
         return unDoneTasks;
     }
 
     private ArrayList<TaskItem> readTaskFile(String taskFileName) {
         ArrayList<TaskItem> unDoneTasks = new ArrayList<TaskItem>();
-        CalendarUtil cutil = new CalendarUtil();
+        CalendarUtil cUtil = new CalendarUtil();
 
             try {
                 InputStream in = activity.openFileInput(taskFileName);
@@ -38,7 +38,7 @@ public class UnDoneTask {
                     String s;
                     while ((s = reader.readLine()) != null) {
                         TaskItem unDoneTaskItem = convertSaveFormatToTaskItem(s);
-                        int diff = cutil.compareCalendar(unDoneTaskItem.getCalendar(),Calendar.getInstance());
+                        int diff = cUtil.compareCalendar(unDoneTaskItem.getCalendar(),Calendar.getInstance());
                         if (diff < 0
                                 && unDoneTaskItem.getExecuteStatus() == false) {
                     unDoneTasks.add(unDoneTaskItem);
@@ -50,8 +50,6 @@ public class UnDoneTask {
         }
         return unDoneTasks;
     }
-
-
 
     private TaskItem convertSaveFormatToTaskItem(String s) {
 

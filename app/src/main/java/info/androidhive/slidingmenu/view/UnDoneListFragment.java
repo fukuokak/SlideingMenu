@@ -47,7 +47,7 @@ public class UnDoneListFragment extends Fragment {
     public TaskItemListAdapter setNotDoneTaskListAdapter() {
         Calendar calendar = Calendar.getInstance();
         UnDoneTask unDoneTask = new UnDoneTask(getActivity());
-        ArrayList<TaskItem> taskItemArrayList = unDoneTask.getUnDoneTask(calendar);
+        ArrayList<TaskItem> taskItemArrayList = unDoneTask.getUnDoneTasks(calendar);
         TaskItemListAdapter todoAdapter = new TaskItemListAdapter(getActivity().getApplicationContext(),
                 taskItemArrayList);
         return todoAdapter;
