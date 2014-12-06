@@ -3,9 +3,14 @@ package info.androidhive.slidingmenu.model;
 import android.app.Activity;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import info.androidhive.slidingmenu.Config;
@@ -39,16 +44,31 @@ public class PlannedTask {
         return masterTasks;
     }
 
-    public void storeMasterTask() {
-
+    public void storeMasterTask(ArrayList<MasterTaskItem> taskItems) throws FileNotFoundException, UnsupportedEncodingException {
+        OutputStream out = activity.openFileOutput(fileName, Activity.MODE_PRIVATE);
+        PrintWriter writer = new PrintWriter(new OutputStreamWriter(out, "UTF-8"));
+        try {
+            for (int i = 0; i < taskItems.size(); i++) {
+                MasterTaskItem taskItem = taskItems.get(i);
+                writer.append(convertReserveTaskItemToSaveFormat(taskItem) + "\r\n");
+            }
+        } finally {
+            writer.close();
+        }
     }
 
-    public void updateMAsterTask() {
+    public void updateMasterTask() {
 
     }
 
     public String convertReserveTaskItemToSaveFormat(MasterTaskItem taskItem) {
-        String s = "";
+        String s =
+                '"' + taskItem.getMasterTaskNum().toString() + "\"," +
+                        '"' + taskItem.getTaskTitle() + "\"," +
+                        '"' + taskItem.getRepeatPattern() + "\"," +
+                        '"' + taskItem.getTheDay() + "\"," +
+                        '"' + taskItem.getTheWeekDay() + "\"," +
+                        '"' + taskItem.getDoTime() + "\"";
         return s;
     }
 
