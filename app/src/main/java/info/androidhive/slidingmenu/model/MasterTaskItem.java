@@ -15,7 +15,6 @@ public class MasterTaskItem {
     private Integer theDay;
     private String[] theWeekDay;
     private String doTime;
-    private Boolean executeStatus;
 
     public MasterTaskItem(Long MasterTaskNum, String taskTitle, String repeatPattern, Integer theDay, String[] theWeekDay, String doTime) throws NullPointerException {
 
@@ -29,10 +28,33 @@ public class MasterTaskItem {
         } else {
             throw new NullPointerException
                     ("taskInterval is not match");
-        }
-        this.theDay = theDay;
-        this.theWeekDay = theWeekDay;
-        this.doTime = doTime;
+    }
+    this.theDay = theDay;
+    this.theWeekDay = theWeekDay;
+    this.doTime = doTime;
     }
 
+    public Long getMasterTaskNum() {
+        return MasterTaskNum;
+    }
+
+    public String getTaskTitle() {
+        return taskTitle;
+    }
+
+    public String getRepeatPattern() {
+        return repeatPattern;
+    }
+
+    public Integer getTheDay() {
+        return theDay;
+    }
+
+    public String[] getTheWeekDay() {
+        return theWeekDay;
+    }
+
+    public String getDoTime() {
+        return doTime;
+    }
 }
